@@ -1,0 +1,6 @@
+{:paths ["src" "target/classes"]
+
+ :aliases
+ {:build {:deps {io.github.clojure/tools.build {:tag "v0.6.2"
+                                                :sha "7ef409b370312c8819c587aa648177331602fa44"}}
+          :ns-default build}}}
