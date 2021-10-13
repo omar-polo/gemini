@@ -56,7 +56,7 @@ easily.  It automatically closes the request and evaluates the body
 only when the request is successful, otherwise throws an exception.
 
 ```clojure
-user=> (with-request [req (gemini/fetch "gemini://gemini.circumlunar.space/")]
+user=> (gemini/with-request [req (gemini/fetch "gemini://gemini.circumlunar.space/")]
          ,,,)
 ```
 
