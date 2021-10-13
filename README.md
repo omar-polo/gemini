@@ -86,5 +86,14 @@ user=> (gemini/with-request [req (gemini/fetch "gemini://gemini.circumlunar.spac
  ,,,]
 ```
 
+The [gemtext][gemtext] library supports streaming via the
+`gemtext.core/parse` transducer:
+
+```clojure
+user=> (gemini/with-request [req (gemini/fetch "gemini://gemini.circumlunar.space/")]
+         (transduce gemtext/parser conj [] (line-seq (:body req))))
+,,,
+```
+
 
 [gemtext]: https://github.com/omar-polo/gemtext
