@@ -39,10 +39,10 @@
 (defmacro with-request [[var req] & body]
   "Make a request, eval `body` when it succeed and automatically close
    the request, or throw an exception if the request fails."
-  `(let [,var ,req]
-     (when-let [e# (:error ,var)]
+  `(let [~var ~req]
+     (when-let [e# (:error ~var)]
        (throw e#))
-     (with-open [req# (:request ,var)]
+     (with-open [req# (:request ~var)]
        ~@body)))
 
 (comment
