@@ -1,7 +1,8 @@
 (ns gemini.core
   (:require
    [clojure.java.io :as io])
-  (:import (com.omarpolo.gemini Request)))
+  (:import
+   (com.omarpolo.gemini Request)))
 
 (defmacro ^:private request->map [& args]
   `(try
@@ -25,20 +26,24 @@
   ([host port uri]
    (request->map host port uri)))
 
-(defn body-as-string! [{r :request}]
+(defn body-as-string!
   "Read all the response into a strings and returns it.  The request
   will be closed."
+  [{r :request}]
   (let [sw (java.io.StringWriter.)]
     (with-open [r r]
       (io/copy (.body r) sw)
       (.toString sw))))
 
-(defn close [{r :request}]
+(defn close
+  "Close a request."
+  [{r :request}]
   (.close r))
 
-(defmacro with-request [[var req] & body]
+(defmacro with-request
   "Make a request, eval `body` when it succeed and automatically close
-   the request, or throw an exception if the request fails."
+  the request, or throw an exception if the request fails."
+  [[var req] & body]
   `(let [~var ~req]
      (when-let [e# (:error ~var)]
        (throw e#))
