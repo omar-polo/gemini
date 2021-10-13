@@ -43,9 +43,9 @@ user=> (-> (gemini/fetch "gemini://gemini.circumlunar.space/")
 ```clojure
 user=> (let [req (gemini/fetch "...")]
          (when-not (:error req)
-		   ;; do something with req
-		   ,,,
-		   (gemini/close req)))
+           ;; do something with req
+           ,,,
+           (gemini/close req)))
 ```
 
 `with-request` is a macro like `with-open` to making connection
