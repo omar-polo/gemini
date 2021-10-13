@@ -1,6 +1,7 @@
 # gemini.core
 
-A Clojure library to make Gemini requests.
+A Clojure library to make Gemini requests that exposes some low-level
+API to handle network requests.
 
 
 ## Usage
