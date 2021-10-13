@@ -108,7 +108,7 @@ public class Request implements AutoCloseable {
         }
     }
 
-    public SSLSocket connect(String host, int port) throws IOException {
+    private SSLSocket connect(String host, int port) throws IOException {
         try {
             var params = new SSLParameters();
             params.setServerNames(Collections.singletonList(new SNIHostName(host)));

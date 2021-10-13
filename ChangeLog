@@ -1,0 +1,4 @@
+2021-10-13  Omar Polo  <op@omarpolo.com>
+
+	* Request.java (connect): mark connect as private
+
