@@ -45,11 +45,6 @@
      (with-open [req# (:request ~var)]
        ~@body)))
 
-(comment
-  (with-request [req (fetch ,,,)]
-    ,,,)
-  )
-
 
 ;; helpers
 
