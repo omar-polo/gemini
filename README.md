@@ -1,5 +1,7 @@
 # gemini.core
 
+[![Clojars Project](https://img.shields.io/clojars/v/com.omarpolo/gemini.svg)](https://clojars.org/com.omarpolo/gemini)
+
 A Clojure library to make Gemini requests that exposes some low-level
 API to handle network requests.
 
