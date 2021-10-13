@@ -17,8 +17,7 @@
   "Make a gemini request.  `uri` may be a URI, URL or string, and
   represent the request to perform.  `host` and `port` are extracted
   from the given `uri` in not given, and port defaults to 1965.  The
-  returned request needs to be closed when done, or use the
-  `with-request` macro."
+  returned request needs to be closed when done."
   ([uri]
    (request->map uri))
   ([host uri]
