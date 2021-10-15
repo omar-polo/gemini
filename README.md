@@ -122,3 +122,11 @@ user=> (gemini/with-request [req {:request "gemini://gemini.circumlunar.space/"}
 
 
 [gemtext]: https://github.com/omar-polo/gemtext
+
+
+## License
+
+Copyright © 2021 Omar Polo, all rights reserved.
+
+Distributed under the Eclipse Public License either version 1.0 or (at
+your option) any later version.
