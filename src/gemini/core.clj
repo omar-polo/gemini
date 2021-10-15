@@ -89,9 +89,20 @@
   if `true` follow up to 5 redirects, or the number of redirects to
   follow.
 
-  Return a map with `:request`, `:code`, `:meta`, `:body` on success
-  or `:error` on failure.  The request needs to be closed when done
-  usign `close`."
+  If the returned map contains an `:error` key the request failed for
+  the specified reason.  Otherwise, the map contains the following keys:
+
+  - `:uri`: the URI of the request.  May be different from the
+  requested one if `:follow-redirects?` was specified.
+
+  - `:request`: the object backing the request.
+
+  - `:code` and `:meta` are the parsed header response.
+
+  - `:body` an instance of a `BufferedReader`.  Note: closing the body
+  is not enugh, always call `clase` on the returned map.
+
+  - `:redirected?` true if a redirect was followed."
   [params]
   (let [{:keys [host port request follow-redirects?] :as orig} (parse-params params)]
     (loop [n           follow-redirects?
