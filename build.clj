@@ -5,7 +5,7 @@
 
 (def repo "github.com/omar-polo/gemini.git")
 (def lib 'com.omarpolo/gemini)
-(def version (format "0.1.0"))
+(def version (format "0.2.0"))
 (def class-dir "target/classes")
 (def basis (b/create-basis {:project "deps.edn"}))
 (def jar-file (format "target/%s-%s.jar" (name lib) version))
