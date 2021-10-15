@@ -57,7 +57,7 @@ user=> (gemini/fetch {:request "gemini://gemini.circumlunar.space"
 It also closes the request automatically.
 
 ```clojure
-user=> (-> "gemini://gemini.circumlunar.space/"
+user=> (-> {:request "gemini://gemini.circumlunar.space/"}
            gemini/fetch
            gemini/body-as-string!)
 "# Project Gemini\n\n## Overview\n\nGemini is a new internet protocol which..."
