@@ -101,7 +101,7 @@ e.g. the [gemtext][gemtext] library:
 ```clojure
 user=> (require '[gemtext.core :as gemtext])
 nil
-user=> (gemini/with-request [req (gemini/fetch "gemini://gemini.circumlunar.space/")]
+user=> (gemini/with-request [req {:request "gemini://gemini.circumlunar.space/"}]
          (gemtext/parse (:body req)))
 [[:header-1 "Project Gemini"]
  [:text ""]
@@ -115,7 +115,7 @@ The [gemtext][gemtext] library supports streaming via the
 `gemtext.core/parse` transducer:
 
 ```clojure
-user=> (gemini/with-request [req (gemini/fetch "gemini://gemini.circumlunar.space/")]
+user=> (gemini/with-request [req {:request "gemini://gemini.circumlunar.space/"}]
          (transduce gemtext/parser conj [] (line-seq (:body req))))
 ,,,
 ```
