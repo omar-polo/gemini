@@ -16,32 +16,54 @@ user=> (require '[gemini.core :as gemini])
 
 ### Documentation
 
-`fetch` makes a Gemini request and returns a map with `:request`,
-`:meta`, `:code` and `:body` as keys, or `:error` if an error occur.
+`fetch` makes a Gemini request.  The request needs to be closed
+afterwards using `close`.
 
-The request needs to be closed afterwards using `close`.
+Takes a map with the following keys (only `:request` is mandatory):
+
+ - `:proxy`: a map of `:host` and `:port`, identifies the server to
+   send the requests to.  This allows to use a gemini server as a
+   proxy, it doesn't do any other kind of proxying (e.g. SOCK5.)
+ - `:request` the URI (as string) to require.
+ - `:follow-redirects?` if `false` or `nil` don't follow redirects, if
+   `true` follow up to 5 redirects, or the number of redirects to
+   follow.
+
+Returns a map with `:error` key if an error occur or with the
+following fields if it succeeds:
+
+ - `:uri`: the URI of the request.  May be different from the
+   requested one if `:follow-redirects?` was specified.
+ - `:request`: the object backing the request.
+ - `:code` and `:meta` are the parsed header response.
+ - `:body` an instance of a `BufferedReader`.  Note: closing the body
+   is not enugh, always call `clase` on the returned map.
+ - `:redirected?` true if a redirect was followed.
 
 ```clojure
-user=> (gemini/fetch "gemini://gemini.circumlunar.space/")
-{:request
- #object[com.omarpolo.gemini.Request 0x3b270767 "com.omarpolo.gemini.Request@3b270767"],
- :meta "gemini://gemini.circumlunar.space/",
- :code 31,
+user=> (gemini/fetch {:request "gemini://gemini.circumlunar.space"
+                      :follow-redirects? true})
+{:uri "gemini://gemini.circumlunar.space/",
+ :request
+ #object[com.omarpolo.gemini.Request 0x6fa9ec6f "com.omarpolo.gemini.Request@6fa9ec6f"],
+ :code 20,
+ :meta "text/gemini",
  :body
- #object[java.io.BufferedReader 0x49358b66 "java.io.BufferedReader@49358b66"]}
+ #object[java.io.BufferedReader 0x18a8d9e0 "java.io.BufferedReader@18a8d9e0"],
+ :redirected? true}
 ```
 
 `body-as-string!` reads all the response into a string and returns it.
 It also closes the request automatically.
 
 ```clojure
-user=> (-> (gemini/fetch "gemini://gemini.circumlunar.space/")
+user=> (-> "gemini://gemini.circumlunar.space/"
+           gemini/fetch
            gemini/body-as-string!)
 "# Project Gemini\n\n## Overview\n\nGemini is a new internet protocol which..."
 ```
 
-`close` closes a request.  It needs to be called after every
-(successful) request.
+`close` closes a request.  It needs to be called after every request.
 
 ```clojure
 user=> (let [req (gemini/fetch "...")]
@@ -56,7 +78,7 @@ easily.  It automatically closes the request and evaluates the body
 only when the request is successful, otherwise throws an exception.
 
 ```clojure
-user=> (gemini/with-request [req (gemini/fetch "gemini://gemini.circumlunar.space/")]
+user=> (gemini/with-request [req {:request "gemini://gemini.circumlunar.space/"}]
          ,,,)
 ```
 
