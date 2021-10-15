@@ -148,5 +148,5 @@
   `(let [~var (fetch ~spec)]
      (when-let [e# (:error ~var)]
        (throw e#))
-     (with-open [req# (:request ~var)]
+     (with-open [req# ^Request (:request ~var)]
        ~@body)))
