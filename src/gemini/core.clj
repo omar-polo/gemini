@@ -114,7 +114,7 @@
                                       (recur (dec n)
                                              (resolve-uri request (:meta res))
                                              true))
-          :else                   res)))))
+          :else                   (assoc res :redirected? redirected?))))))
 
 (defn body-as-string!
   "Read all the response into a strings and returns it.  The request
