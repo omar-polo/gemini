@@ -66,7 +66,7 @@ user=> (-> {:request "gemini://gemini.circumlunar.space/"}
 `close` closes a request.  It needs to be called after every request.
 
 ```clojure
-user=> (let [req (gemini/fetch "...")]
+user=> (let [req (gemini/fetch {,,,})]
          (when-not (:error req)
            ;; do something with req
            ,,,
