@@ -33,12 +33,12 @@
    61 "certificate not authorized"
    62 "certificate not valid"})
 
-(defn is-input?                [{c :code}] (= 1 (/ c 10)))
-(defn is-success?              [{c :code}] (= 2 (/ c 10)))
-(defn is-redirect?             [{c :code}] (= 3 (/ c 10)))
-(defn is-temporary-failure?    [{c :code}] (= 4 (/ c 10)))
-(defn is-permanent-failure?    [{c :code}] (= 5 (/ c 10)))
-(defn is-client-cert-required? [{c :code}] (= 6 (/ c 10)))
+(defn is-input?                [{c :code}] (= 1 (quot c 10)))
+(defn is-success?              [{c :code}] (= 2 (quot c 10)))
+(defn is-redirect?             [{c :code}] (= 3 (quot c 10)))
+(defn is-temporary-failure?    [{c :code}] (= 4 (quot c 10)))
+(defn is-permanent-failure?    [{c :code}] (= 5 (quot c 10)))
+(defn is-client-cert-required? [{c :code}] (= 6 (quot c 10)))
 
 
 
