@@ -37,7 +37,7 @@ following fields if it succeeds:
  - `:request`: the object backing the request.
  - `:code` and `:meta` are the parsed header response.
  - `:body` an instance of a `BufferedReader`.  Note: closing the body
-   is not enough, always call `clase` on the returned map.
+   is not enough, always call `close` on the returned map.
  - `:redirected?` true if a redirect was followed.
 
 ```clojure
