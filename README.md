@@ -23,7 +23,7 @@ Takes a map with the following keys (only `:request` is mandatory):
 
  - `:proxy`: a map of `:host` and `:port`, identifies the server to
    send the requests to.  This allows to use a gemini server as a
-   proxy, it doesn't do any other kind of proxying (e.g. SOCK5.)
+   proxy, it doesn't do any other kind of proxying (e.g. SOCKS.)
  - `:request` the URI (as string) to require.
  - `:follow-redirects?` if `false` or `nil` don't follow redirects, if
    `true` follow up to 5 redirects, or the number of redirects to
@@ -73,9 +73,9 @@ user=> (let [req (gemini/fetch {,,,})]
            (gemini/close req)))
 ```
 
-`with-request` is a macro like `with-open` to making connection
-easily.  It automatically closes the request and evaluates the body
-only when the request is successful, otherwise throws an exception.
+`with-request` is a macro like `with-open` to handle connections easily.
+It automatically closes the request and evaluates the body only when the
+request is successful, otherwise throws an exception.
 
 ```clojure
 user=> (gemini/with-request [req {:request "gemini://gemini.circumlunar.space/"}]
@@ -89,14 +89,14 @@ The `:body` keyword in the returned map is an instance of a Java
 BufferedReader, so streaming content is easy.
 
 However, `body-as-string!` needs to materialise the full reply, so in
-case of a streaming request it will never return!
+case of an illimitate request it may never return!
 
 
 ## text/gemini
 
 This library only implements the network part of Gemini, it doesn't
 try to handle any kind of content.  To handle text/gemini you can use
-e.g. the [gemtext][gemtext] library:
+for e.g. my [gemtext][gemtext] library:
 
 ```clojure
 user=> (require '[gemtext.core :as gemtext])
