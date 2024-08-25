@@ -105,7 +105,7 @@ user=> (gemini/with-request [req {:request "gemini://geminiprotocol.net/"}]
          (gemtext/parse (:body req)))
 [[:header-1 "Project Gemini"]
  [:text ""]
- [:header-2 "gemini in 100 words"]
+ [:header-2 "Gemini in 100 words"]
  [:text ""]
  [:text "Gemini is a new internet technology supporting an electronic ..."]
  ,,,]
