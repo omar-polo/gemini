@@ -41,9 +41,9 @@ following fields if it succeeds:
  - `:redirected?` true if a redirect was followed.
 
 ```clojure
-user=> (gemini/fetch {:request "gemini://gemini.circumlunar.space"
+user=> (gemini/fetch {:request "gemini://geminiprotocol.net/"
                       :follow-redirects? true})
-{:uri "gemini://gemini.circumlunar.space/",
+{:uri "gemini://geminiprotocol.net/",
  :request
  #object[com.omarpolo.gemini.Request 0x6fa9ec6f "com.omarpolo.gemini.Request@6fa9ec6f"],
  :code 20,
@@ -57,10 +57,10 @@ user=> (gemini/fetch {:request "gemini://gemini.circumlunar.space"
 It also closes the request automatically.
 
 ```clojure
-user=> (-> {:request "gemini://gemini.circumlunar.space/"}
+user=> (-> {:request "gemini://geminiprotocol.net/"}
            gemini/fetch
            gemini/body-as-string!)
-"# Project Gemini\n\n## Overview\n\nGemini is a new internet protocol which..."
+"# Project Gemini\n\n## Gemini in 100 words\n\nGemini is a new internet..."
 ```
 
 `close` closes a request.  It needs to be called after every request.
@@ -78,7 +78,7 @@ It automatically closes the request and evaluates the body only when the
 request is successful, otherwise throws an exception.
 
 ```clojure
-user=> (gemini/with-request [req {:request "gemini://gemini.circumlunar.space/"}]
+user=> (gemini/with-request [req {:request "gemini://geminiprotocol.net/"}]
          ,,,)
 ```
 
@@ -101,13 +101,13 @@ for e.g. my [gemtext][gemtext] library:
 ```clojure
 user=> (require '[gemtext.core :as gemtext])
 nil
-user=> (gemini/with-request [req {:request "gemini://gemini.circumlunar.space/"}]
+user=> (gemini/with-request [req {:request "gemini://geminiprotocol.net/"}]
          (gemtext/parse (:body req)))
 [[:header-1 "Project Gemini"]
  [:text ""]
- [:header-2 "Overview"]
+ [:header-2 "gemini in 100 words"]
  [:text ""]
- [:text "Gemini is a new internet protocol which:"]
+ [:text "Gemini is a new internet technology supporting an electronic ..."]
  ,,,]
 ```
 
@@ -115,7 +115,7 @@ The [gemtext][gemtext] library supports streaming via the
 `gemtext.core/parse` transducer:
 
 ```clojure
-user=> (gemini/with-request [req {:request "gemini://gemini.circumlunar.space/"}]
+user=> (gemini/with-request [req {:request "gemini://geminiprotocol.net/"}]
          (transduce gemtext/parser conj [] (line-seq (:body req))))
 ,,,
 ```
